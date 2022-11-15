@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>console.log('person1 shows ticket');
+        // console.log('person2 shows ticket');
+        
+        // const preMovie = async () => {
+        
+        //   const person3PromiseToShowTicketWhenWifeArrives = new Promise((resolve, reject) => {
+        //     setTimeout(() => resolve('ticket'), 3000);
+        //   });
+        //   const getPopcorn =  new Promise((resolve, reject) => {
+        //         setTimeout(() => resolve('popcorn'), 3000);
+        //   });
+          
+        //   const addButter =  new Promise((resolve, reject) => {
+        //         setTimeout(() => resolve('butter'), 3000);
+        //   });
+
+        //   const getColdDrinks =  new Promise((resolve, reject) => {
+        //         setTimeout(() => resolve('coldrink'), 3000);
+        //   });
+        
+        //   let ticket = await person3PromiseToShowTicketWhenWifeArrives;
+        
+        //   console.log(`got the ${ticket}`);
+        //   console.log(`Husband:we should go in now`);
+        //   console.log(`Wife: "i am hungry"`);
+          
+        //   let popcorn = await getPopcorn;
+        //   console.log(`Husband: here is ${popcorn}`);
+        //     console.log(`Husband:we should go in now`);
+        //   console.log(`Wife: "I dont like popcorn without butter!"`);
+          
+        //   let butter = await addButter;
+        //   console.log(`added ${butter}`);
+           
+        //   console.log(`Husband:Anything else darling`);
+        //     console.log(`Wife: i neeed codldrink`);
+          
+
+        //   let colddrink = await getColdDrinks;
+        //   console.log(`added ${colddrink}`);
+           
+        //   console.log(`Husband:Anything else darling`);
+        //     console.log(`Wife: lets go we are going to miss the preivew`);
+        //   console.log(`Husband: thanks for the reminder *grin*`);
+          
+        //   return ticket;
+          
+        // };
+        
+        // preMovie().then((t) => console.log(`person4 shows ${t}`));
+        
+        // console.log('person4 shows ticket');
+
+
+
+
+    /////////////////as per question/////////////////////
+
+    const obj=[{title:"one"},
+                {title:"two"},
+                {title:"three"}];
+
+
+    function getpost()
+    {
+        setTimeout(() => {
+            obj.forEach((posts,index)=>{
+                console.log(posts.title);
+            })
+        }, 1000);
+    }
+
+    async function createpost(data)
+    {
+        return await new Promise((resolve,reject)=>{
+
+            setTimeout(() => {
+                resolve(obj.push(data));
+            }, 5000);
+
+        })
+    }
+
+    obj.push({title:"five"});
+    createpost({title:"four"}).then(()=>{
+        getpost();
+    })
+
+    let timeint=0;
+    async function deletepost()
+    {
+        clearInterval(timeint);
+        return await new Promise((resolve,reject)=>{
+
+            timeint=setInterval(() => {
+                if(obj.length>0){
+                     resolve(obj.pop());
+                     getpost();
+                }
+                else
+                {
+                    console.log("list is empty");
+                    reject("lsit lis empty");
+                }
+            }, 5000);
+
+        })
+    }
+    getpost();
+    createpost({title:"six"}).then(()=>{
+        getpost();
+        deletepost()
+        getpost();
+    }).then((err)=>{
+        console.log(err);
+    })
+
+
+
+    
+        </script>
+</body>
+</html>
